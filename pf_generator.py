@@ -61,8 +61,8 @@ def Tie2_filler(MJ21_row, MJ5_row, nf, pathologic_headers, row_index, file):
           nf.write('{0}\t{1}\n'.format(pathologic_headers[9], MJ5_row['EC'][i].encode("utf-8")))
         else:
           # delete temporary Tier2 file
-          file.close()
-          os.remove("./Tier2.pf")
+          # file.close()
+          # os.remove("./Tier2.pf")
           # break - error message
           sys.exit(f"Wrong syntax of EC number in row {row_index+3}")    
     else:
@@ -78,10 +78,10 @@ def main():
     data= pd.read_csv(file)
     data = data.fillna(' ')
     MJ5 = separator(data, 1, 6)
-    MJ21 = separator(data, 8, 16)
-
+    MJ21 = separator(data, 6, 16)
+    
     pathologic_headers = ['ID', 'ACCESSION-2', 'NAME', 'SYNONYM',f'REPLICON\t{replicon}', 
-                              'STARTBASE', 'ENDBASE','PRODUCT-TYPE', 'FUNCTION', 'EC']
+                              'STARTBASE', 'ENDBASE','PRODUCT-TYPE', 'FUNCTION', 'EC', 'DBLINK']
     with open('./Tier2.pf', 'w') as nf:
         for i in range(len(MJ21)):
         #check if current ID is the same with previous 

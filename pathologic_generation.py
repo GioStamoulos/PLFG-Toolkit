@@ -12,8 +12,8 @@ class pathologic_generation:
         MJ["ID"].iloc[1]
         return MJ
 
-    def Tie2_filler(self, MJ21_row, MJ5_row, nf, pathologic_headers, row_index, file):
-        if (MJ21_row['ID']!= '-'):
+    def Tie2_filler(self, MJ21_row, MJ5_row, nf, pathologic_headers, row_index):
+        if (MJ21_row['ID']!= '-' and MJ21_row['ID']!=' '):
     #write ID and ACCESSION-2
             nf.write('{0}\t{1}\n'.format(pathologic_headers[0], MJ21_row['ID']))
             nf.write('{0}\t{1}\n'.format(pathologic_headers[1],MJ21_row['ID']))
@@ -37,6 +37,11 @@ class pathologic_generation:
             nf.write('{}\t{}\n'.format(pathologic_headers[7], MJ21_row['Product Type']))
     #write fuction
             nf.write('{0}\t{1}\n'.format(pathologic_headers[8],MJ21_row['description']))
+    #write DBLINK
+            if MJ21_row['PMID']!= ' ':
+                nf.write('{0}\tPMID:{1}\n'.format(pathologic_headers[-1], MJ21_row['PMID']))
+            else:
+                pass
     # write EC number if exists
             if  MJ5_row['EC']!= ' ':
     # write more than one EC numbers if exists
@@ -45,10 +50,14 @@ class pathologic_generation:
                     ec = EC_Validation(MJ5_row['EC'][i])
     # EC syntax checker 
                     if ec.EC_check():
-                        nf.write('{0}\t{1}\n'.format(pathologic_headers[9], MJ5_row['EC'][i].encode("utf-8")))
+                        # some tranformation due some char errors 
+                        EC_current = str(MJ5_row['EC'][i].encode("utf-8"))
+                        EC_current = EC_current[2:-1]
+                        #write EC number
+                        nf.write('{0}\t{1}\n'.format(pathologic_headers[9], EC_current ))
                     else:
         # delete temporary Tier2 file
-                        file.close()
+                        nf.close()
                         os.remove("./Tier2.pf")
         # break - error message
                         sys.exit(f"Wrong syntax of EC number in row {row_index+3}")    

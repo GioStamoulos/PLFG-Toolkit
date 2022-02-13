@@ -1,2 +1,2 @@
-./mj_05_vs_mj_biocyc.csv
+./first_prepro_try1.csv
 NC_000909
