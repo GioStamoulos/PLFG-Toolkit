@@ -1,0 +1,1 @@
+py prepro_main.py < in_prepro.txt

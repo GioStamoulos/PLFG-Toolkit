@@ -1,1 +1,1 @@
-./prepro_try1.xlsx ./first_prepro_try1.csv ./NC_000909.pf
+./comparison.xlsx ./curation.csv ./NC_000909.pf

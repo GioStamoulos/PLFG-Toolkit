@@ -1,2 +1,2 @@
-./first_prepro_try1.csv
+./curation.csv
 NC_000909
