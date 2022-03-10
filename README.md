@@ -100,7 +100,7 @@ the pathologic generator tool that takes as input the above file is captured in 
 Figure 4: A sample of the pathologic file of the curated   PGDB that was generated from the curation csv file by utilizing
 the pathologic file generator tool.
 ```
-#References
+# References
 <br />
 [1] https://bioinformatics.ai.sri.com/ptools/tpal.pf
 
